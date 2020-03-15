@@ -1,22 +1,14 @@
 import InitialDrivers.InitialDriver;
 import Page.*;
-
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.Select;
-
-
+import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 import java.util.Iterator;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Test {
-
-
-
 
     @ParameterizedTest
     @DisplayName("Логин на яндекс почту")
@@ -29,8 +21,7 @@ public class Test {
         ManagementMethod.clickWebElement(Auth.entranceLogin);
         ManagementMethod.SetTextWebElement(Auth.password, "AutotestUser123");
         ManagementMethod.clickWebElement(Auth.entrancePassword);
-        assertEquals("AutotestUser",ManagementMethod.GetTextWebElement(Message.user));
-
+        assertEquals("AutotestUser", ManagementMethod.GetTextWebElement(Message.user));
     }
 
     @ParameterizedTest
@@ -44,7 +35,7 @@ public class Test {
         ManagementMethod.clickWebElement(Auth.entranceLogin);
         ManagementMethod.SetTextWebElement(Auth.password, "NoAutotestUser123");
         ManagementMethod.clickWebElement(Auth.entrancePassword);
-        assertEquals("Неверный пароль",ManagementMethod.GetTextWebElement(Auth.textErrorPassword));
+        assertEquals("Неверный пароль", ManagementMethod.GetTextWebElement(Auth.textErrorPassword));
     }
 
     @ParameterizedTest
@@ -52,10 +43,10 @@ public class Test {
     @ValueSource(strings = {"Chrome"})
     void SignInYandexAndOut(String name) throws InterruptedException, IOException {
         InitialDriver.driver = InitialDriver.getDriver(name);
-        SignInYandex( name);
+        SignInYandex(name);
         ManagementMethod.clickWebElement(Message.user);
         ManagementMethod.clickWebElement(Message.OutServiceYandex);
-        assertEquals("Войти в почту",ManagementMethod.GetTextWebElement(MainYandex.SignInToMail));
+        assertEquals("Войти в почту", ManagementMethod.GetTextWebElement(MainYandex.SignInToMail));
     }
 
     @ParameterizedTest
@@ -64,10 +55,10 @@ public class Test {
     void SignInYandexBadLogin(String name) throws InterruptedException, IOException {
         InitialDriver.driver = InitialDriver.getDriver(name);
         MainYandex.pageMainYandex();
-        ManagementMethod.setWindowHadles( MainYandex.SignInToMail, 1);
-        ManagementMethod.SetTextWebElement(Auth.login,  "NoAutotestUser");
+        ManagementMethod.setWindowHadles(MainYandex.SignInToMail, 1);
+        ManagementMethod.SetTextWebElement(Auth.login, "NoAutotestUser");
         ManagementMethod.clickWebElement(Auth.entranceLogin);
-        assertEquals("Такого аккаунта нет",ManagementMethod.GetTextWebElement(Auth.textErrorLogin));
+        assertEquals("Такого аккаунта нет", ManagementMethod.GetTextWebElement(Auth.textErrorLogin));
     }
 
     @ParameterizedTest
@@ -76,21 +67,22 @@ public class Test {
     void SignInYandexNavigate(String name) throws InterruptedException, IOException {
         InitialDriver.driver = InitialDriver.getDriver(name);
         MainYandex.pageMainYandex();
-        ManagementMethod.setWindowHadles( MainYandex.Videos, 1);
-        ManagementMethod.switchToAndAssert(0,"https://yandex.by/portal/video");
-        ManagementMethod.setWindowHadles( MainYandex.Images, 2);
-        ManagementMethod.switchToAndAssert(0,"https://yandex.by/images/");
-        ManagementMethod.setWindowHadles( MainYandex.News, 3);
-        ManagementMethod.switchToAndAssert(0,"https://yandex.by/news/");
-        ManagementMethod.setWindowHadles( MainYandex.Maps, 4);
-        ManagementMethod.switchToAndAssert(0,"https://yandex.by/maps/");
-        ManagementMethod.setWindowHadles( MainYandex.Markets, 5);
-        ManagementMethod.switchToAndAssert(0,"https://market.yandex.by/");
-        ManagementMethod.setWindowHadles( MainYandex.Interpreters, 6);
-        ManagementMethod.switchToAndAssert(0,"https://translate.yandex.by/");
-        ManagementMethod.setWindowHadles( MainYandex.Musics, 7);
-        ManagementMethod.switchToAndAssert(0,"https://music.yandex.by/");
+        ManagementMethod.setWindowHadles(MainYandex.Videos, 1);
+        ManagementMethod.switchToAndAssert(0, "https://yandex.by/portal/video");
+        ManagementMethod.setWindowHadles(MainYandex.Images, 2);
+        ManagementMethod.switchToAndAssert(0, "https://yandex.by/images/");
+        ManagementMethod.setWindowHadles(MainYandex.News, 3);
+        ManagementMethod.switchToAndAssert(0, "https://yandex.by/news/");
+        ManagementMethod.setWindowHadles(MainYandex.Maps, 4);
+        ManagementMethod.switchToAndAssert(0, "https://yandex.by/maps/");
+        ManagementMethod.setWindowHadles(MainYandex.Markets, 5);
+        ManagementMethod.switchToAndAssert(0, "https://market.yandex.by/");
+        ManagementMethod.setWindowHadles(MainYandex.Interpreters, 6);
+        ManagementMethod.switchToAndAssert(0, "https://translate.yandex.by/");
+        ManagementMethod.setWindowHadles(MainYandex.Musics, 7);
+        ManagementMethod.switchToAndAssert(0, "https://music.yandex.by/");
     }
+
     @ParameterizedTest
     @DisplayName("Яндекс - переключение языка на английский")
     @ValueSource(strings = {"Chrome"})
@@ -100,17 +92,12 @@ public class Test {
         ManagementMethod.clickWebElement(MainYandex.Language);
         ManagementMethod.clickWebElement(MainYandex.AddLanguage);
         ManagementMethod.clickWebElement(YandexSettings.SelectLanguage);
-        //JavascriptExecutor executor = (JavascriptExecutor)InitialDriver.driver;
-        //executor.executeScript("arguments[0].click();", YandexSettings.EnLanguage);
-        //InitialDriver.driver.findElement(YandexSettings.EnLanguage).select;
-        //Select dropdown = new Select(InitialDriver.driver.findElement(YandexSettings.EnLanguage));
-        //dropdown.selectByIndex(1);
-       //ManagementMethod.clickWebElement(By.xpath("select option[value=\"en\"]"));//
         ManagementMethod.clickWebElement(YandexSettings.EnLanguage);
-        ManagementMethod.clickWebElement(YandexSettings.ButtonSave);//
-        ManagementMethod.clickWebElement(MainYandex.SignInToMail);
-        assertEquals("Log in to continue",ManagementMethod.GetTextWebElement(Auth.LogInToContinue));
+        ManagementMethod.clickWebElement(YandexSettings.ButtonSave);
+        ManagementMethod.setWindowHadles(MainYandex.SignInToMail, 1);
+        assertEquals("Log in", ManagementMethod.GetTextWebElement(Auth.entranceLogin));
     }
+
     @AfterEach
     public void createAndStopService() {
         Iterator<WebDriver> iter = InitialDriver.drivers.values().iterator();
@@ -119,8 +106,6 @@ public class Test {
         }
         InitialDriver.drivers.clear();
         ManagementMethod.states.clear();
-        ManagementMethod.environment =0;
-
+        ManagementMethod.environment = 0;
     }
-
 }
