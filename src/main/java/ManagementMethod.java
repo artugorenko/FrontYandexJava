@@ -1,23 +1,20 @@
 import InitialDrivers.InitialDriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
-
 import java.util.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class ManagementMethod {
 
     public static int environment = 0;
     public static Map<Integer, String> states = new HashMap<Integer, String>();
 
-public static void switchToAndAssert(int position,String text){
-    assertEquals(true, InitialDriver.driver.getCurrentUrl().contains(text));
-    InitialDriver.driver.switchTo().window(states.get(position).substring(1,states.get(position).length()-1));
-}
+    public static void switchToAndAssert(int position, String text) {
+        assertEquals(true, InitialDriver.driver.getCurrentUrl().contains(text));
+        InitialDriver.driver.switchTo().window(states.get(position).substring(1, states.get(position).length() - 1));
+    }
+
     public static void setWindowHadles(By locator, int position) {
         Set<String> oldWindowsSet = InitialDriver.driver.getWindowHandles();
-
         if (environment == 0) {
             states.put(environment, oldWindowsSet.toString());
             environment++;
@@ -38,9 +35,9 @@ public static void switchToAndAssert(int position,String text){
                     });
             oldWindowsSet.clear();
         }
-
         InitialDriver.driver.switchTo().window(states.get(position));
     }
+
     public static String GetTextWebElement(By locator) throws InterruptedException {
         return Wait.TextWebElement(locator).getText();
     }

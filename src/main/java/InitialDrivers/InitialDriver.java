@@ -1,26 +1,20 @@
 package InitialDrivers;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.firefox.*;
 import org.openqa.selenium.ie.*;
-
 import java.io.*;
 import java.util.*;
 import java.util.logging.*;
 
 public class InitialDriver {
 
-
     public static WebDriver driver;
     public static Map<String, WebDriver> drivers = new HashMap<>();
     private static Logger logger = Logger.getLogger("FrontJava.nose");
 
-
     public static WebDriver getDriver(String name) {
-
         logger.log(Level.INFO, "Создается драйвер для" + name);
-
         if (drivers.containsKey(name)) {
             return drivers.get(name);
         } else {
