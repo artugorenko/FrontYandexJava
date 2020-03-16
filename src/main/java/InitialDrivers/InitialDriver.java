@@ -35,7 +35,7 @@ public class InitialDriver {
 
     private static WebDriver createChrome(String name) {
         ChromeDriverService service = new ChromeDriverService.Builder()
-                .usingDriverExecutable(new File("C:/chromedriver_win32/chromedriver.exe"))
+                .usingDriverExecutable(new File("src/main/resources/chromedriver.exe"))
                 .usingAnyFreePort()
                 .build();
         try {
@@ -51,7 +51,7 @@ public class InitialDriver {
 
     private static WebDriver createIe(String name) {
         InternetExplorerDriverService service = new InternetExplorerDriverService.Builder()
-                .usingDriverExecutable(new File("C:/chromedriver_win32/IEDriverServer.exe"))
+                .usingDriverExecutable(new File("src/main/resources/IEDriverServer.exe"))
                 .usingAnyFreePort()
                 .build();
         try {
@@ -67,7 +67,7 @@ public class InitialDriver {
 
     private static WebDriver createFireFox(String name) {
         GeckoDriverService service = new GeckoDriverService.Builder()
-                .usingDriverExecutable(new File("C:/chromedriver_win32/geckodriver.exe"))
+                .usingDriverExecutable(new File("src/main/resources/geckodriver.exe"))
                 .usingAnyFreePort()
                 .build();
         try {
